@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>IntelHub · Evalueserve</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--pu:#43224d;--pd:#2e1735;--pm:#5a3466;--lav:#9b7aa8;--red:#e0044e;--rs:#ffe3ec;--gr:#4c4c4d;--mu:#8a7f90;--bg:#f4f2f7;--card:#fff;--ln:#e8e2ee;--ls:#f0ecf4;--am:#b8860b;--amb:#fdf3e0;--ok:#1b7a54;--okb:#e5f4ec;--disp:'Crimson Text',Georgia,serif;--ui:'Poppins',Arial,sans-serif;--tx:#4c4c4d}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1a1120;--card:#261a2e;--ln:#3b2a45;--ls:#31233a;--gr:#d9cfe0;--tx:#d9cfe0;--pu:#e6d3ee;--mu:#a597ae;--rs:#4a1a2c;--amb:#3b2f14;--okb:#123326}}
+*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%}
+body{font-family:var(--ui);color:var(--tx);background:var(--bg);font-size:14px;line-height:1.55;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+h1,h2,h3,h4{color:var(--pu);line-height:1.2}button{font-family:var(--ui);cursor:pointer}a{color:var(--red);text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px;border-radius:4px}.hid{display:none!important}
+.scene{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 120% at 50% 0,#4a2755,var(--pd) 70%)}
+.login{width:min(900px,100%);display:grid;grid-template-columns:1.1fr .9fr;border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.bp{background:var(--pu);padding:44px 40px;color:#fff}.bp h1{color:#fff;font-family:var(--disp);font-size:38px;margin:14px 0}.bp p{color:#d3c4db;font-size:13.5px}
+.bp li{list-style:none;padding:5px 0 5px 20px;position:relative;font-size:13px;color:#e6dcec}.bp li:before{content:"";position:absolute;left:0;top:12px;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.fp{background:#fff;padding:44px 38px;color:#4c4c4d}.fp h2{color:#43224d;font-size:22px;margin:6px 0 14px}
+.fp label{display:block;font-size:12px;color:#8a7f90;margin:12px 0 5px}.fp input{width:100%;border:1px solid #e8e2ee;border-radius:10px;padding:11px 13px;font:inherit}
+.bt{width:100%;border:0;background:var(--red);color:#fff;border-radius:10px;padding:13px;font-weight:600;margin-top:18px}.bt:hover{background:#c30343}
+.demo{margin-top:14px;font-size:11.5px;color:#8a7f90;background:#f4f2f7;border-radius:8px;padding:9px 12px}.demo b{color:#43224d}.err{color:var(--red);font-size:12px;margin-top:8px}
+#app{display:grid;grid-template-columns:272px 1fr;height:100%}
+.side{background:linear-gradient(180deg,var(--pu),var(--pd));color:#fff;display:flex;flex-direction:column;overflow-y:auto;transition:transform .2s}
+.side{--pu:#43224d}.hd{padding:18px 18px 10px}.hd .br{font-size:11px;letter-spacing:.22em;color:#e7d9ee;font-weight:600}.hd .pr{font-family:var(--disp);font-size:22px;font-weight:700;color:#fff}
+.cl{margin:6px 14px 4px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:8px 10px}.cl .k{font-size:10px;color:#a98fb5;margin-bottom:4px}
+.cl select{width:100%;background:transparent;color:#fff;border:0;font:600 13px var(--ui)}.cl select option{color:#222}
+.gl{font-size:10px;letter-spacing:.12em;color:#a98fb5;padding:14px 20px 4px;text-transform:uppercase}
+.ni{display:flex;align-items:center;gap:10px;width:calc(100% - 20px);margin:1px 10px;text-align:left;background:none;border:0;color:#d9cbe0;padding:8px 10px;border-radius:9px;font-size:13px;font-weight:500}
+.ni:hover{background:rgba(255,255,255,.07);color:#fff}.ni.on{background:rgba(224,4,78,.18);color:#fff;box-shadow:inset 3px 0 0 var(--red)}.ni svg{flex:0 0 auto;opacity:.85}
+.ni .n{margin-left:auto;background:var(--red);border-radius:99px;font-size:10px;padding:0 7px}
+.so{margin-top:auto;padding:14px 18px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:#d9cbe0}.so button{background:none;border:0;color:#f7c6d8;font-size:12px;text-decoration:underline}
+.main{display:flex;flex-direction:column;min-width:0;height:100%}
+.top{background:var(--card);border-bottom:1px solid var(--ln);padding:10px 22px;display:flex;align-items:center;gap:14px}
+.burger{display:none;border:1px solid var(--ln);background:var(--card);border-radius:9px;width:38px;height:36px;color:var(--pu)}
+.crumb{font-size:13px;color:var(--mu)}.crumb b{color:var(--pu)}.badge{margin-left:auto;font-size:12px;background:var(--ls);border:1px solid var(--ln);border-radius:8px;padding:5px 11px;color:var(--pu)}
+.cv{padding:24px;overflow-y:auto;flex:1}.view{display:none}.view.on{display:block}
+.vh h2{font-family:var(--disp);font-size:28px}.vh p{color:var(--mu);max-width:78ch;margin:4px 0 16px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:18px 20px}.g{display:grid;gap:14px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}
+.kpi .l{font-size:12px;color:var(--mu)}.kpi .v{font-family:var(--disp);font-size:32px;font-weight:700;color:var(--pu);line-height:1.1}.kpi .v.r{color:var(--red)}
+.mh{font-size:12px;font-weight:600;color:var(--pu);margin-bottom:10px}.sec{font-size:15px;font-weight:600;color:var(--pu);margin:20px 0 10px}
+.tb{width:100%;border-collapse:collapse;font-size:12.5px}.tb th{text-align:left;font-size:11px;color:var(--mu);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--ln)}.tb td{padding:10px;border-bottom:1px solid var(--ls);vertical-align:top}.tb tr:last-child td{border:0}
+.pill{font-size:10.5px;font-weight:600;border-radius:6px;padding:2px 8px;white-space:nowrap;background:var(--ls);color:var(--pu)}.p-r{background:var(--rs);color:var(--red)}.p-o{background:var(--okb);color:var(--ok)}.p-a{background:var(--amb);color:var(--am)}.p-d{background:var(--pu);color:var(--card)}
+.est{font-size:9.5px;font-weight:600;color:var(--am);background:var(--amb);border-radius:4px;padding:1px 5px;margin-left:4px}
+.bar{height:8px;border-radius:6px;background:var(--ls);overflow:hidden;margin-top:5px}.bar>i{display:block;height:100%;background:var(--pu)}.bar>i.r{background:var(--red)}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.chip{border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:9px;padding:6px 12px;font-size:12.5px}.chip.on{background:var(--pu);color:var(--card);border-color:var(--pu)}
+.news{border:1px solid var(--ln);background:var(--card);border-radius:12px;padding:15px 18px;margin-bottom:10px}.news h4{font-size:14.5px;margin:6px 0 4px}.news p{font-size:12.8px}.news .m{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11.5px;color:var(--mu)}
+.th{padding:6px 0 6px 16px;position:relative;font-size:12.8px;border-bottom:1px dashed var(--ln)}.th:last-child{border:0}.th:before{content:"";position:absolute;left:1px;top:14px;width:6px;height:6px;border-radius:50%;background:var(--red)}
+.rep{background:linear-gradient(105deg,var(--pu),#5a2f66);color:#fff;border-radius:14px;padding:22px;margin-bottom:14px}.rep h3{color:#fff;font-family:var(--disp);font-size:24px;margin:4px 0 8px}.rep p{color:#e2d3e9;font-size:13px;max-width:70ch}.rep .t{font-size:11px;letter-spacing:.1em;color:#f7c6d8;text-transform:uppercase}
+.acts{display:flex;gap:8px;margin-top:12px}.acts button,.sm{border:1px solid var(--ln);background:var(--card);color:var(--pu);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600}.acts button:hover,.sm:hover{border-color:var(--red)}
+.rep .acts button{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+.chat{display:flex;flex-direction:column;height:calc(100vh - 210px);min-height:380px}.msgs{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:4px}
+.m1{max-width:80%;padding:10px 14px;border-radius:12px;font-size:13px;white-space:pre-wrap}.m1.u{align-self:flex-end;background:var(--pu);color:var(--card)}.m1.b{align-self:flex-start;background:var(--ls);color:var(--tx)}
+.ci{display:flex;gap:8px;margin-top:10px}.ci input{flex:1;border:1px solid var(--ln);border-radius:10px;padding:11px 14px;font:inherit;background:var(--card);color:var(--tx)}.ci button{border:0;background:var(--red);color:#fff;border-radius:10px;padding:0 18px;font-weight:600}
+.pmap{position:relative;background:var(--card);border:1px solid var(--ln);border-radius:12px;aspect-ratio:1.4/1}
+.pmap .ax{position:absolute;font-size:10.5px;color:var(--mu);font-weight:600}.pmap .ax.x{bottom:8px;left:50%;transform:translateX(-50%)}.pmap .ax.y{left:8px;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:left top}
+.pmap .h,.pmap .v{position:absolute;background:var(--ln)}.pmap .h{left:34px;right:12px;top:50%;height:1px}.pmap .v{top:12px;bottom:30px;left:50%;width:1px}
+.pt{position:absolute;transform:translate(-50%,-50%);text-align:center}.pt i{display:block;margin:auto;border-radius:50%;background:rgba(67,34,77,.2);border:2px solid var(--pu)}.pt.r i{background:rgba(224,4,78,.2);border-color:var(--red)}.pt span{font-size:10px;font-weight:600;color:var(--pu);background:var(--card);padding:0 3px;border-radius:3px;white-space:nowrap}
+.hm{display:grid;gap:4px;font-size:11.5px}.hm div{padding:8px 6px;text-align:center;border-radius:6px;font-weight:600}.hm .rh{text-align:left;font-weight:500;color:var(--tx)}.hm .ch{color:var(--pu)}
+.s1{background:#f6d0d3;color:#8a2a34}.s2{background:#fbe0cf;color:#8a4a24}.s3{background:#fdefcf;color:#7a5f16}.s4{background:#e5efd6;color:#4a5f24}.s5{background:#cfe9db;color:#1b5f43}
+.foot{margin-top:22px;padding-top:12px;border-top:1px solid var(--ln);font-size:11px;color:var(--mu)}
+@media(max-width:900px){.login{grid-template-columns:1fr}.bp{display:none}#app{grid-template-columns:1fr}.side{position:fixed;inset:0 auto 0 0;width:280px;z-index:50;transform:translateX(-100%)}.side.open{transform:none}.burger{display:block}.g4,.g3,.g2{grid-template-columns:1fr}.cv{padding:16px}}
+:root[data-theme=dark]{--bg:#1a1120;--card:#261a2e;--ln:#3b2a45;--ls:#31233a;--gr:#d9cfe0;--tx:#d9cfe0;--pu:#e6d3ee;--mu:#a597ae;--rs:#4a1a2c;--amb:#3b2f14;--okb:#123326}
+</style></head><body>
+<div class="scene" id="login"><div class="login"><div class="bp"><div style="font-size:11px;letter-spacing:.24em;font-weight:600;color:#c9b6d3">EVALUESERVE</div><h1>IntelHub</h1><p>News Radar and DNL Automation in one shareable workspace.</p><ul style="margin-top:18px"><li>Daily alerts and newsletter</li><li>Monthly, quarterly, leadership and trend reports</li><li>Market and competitor monitoring</li><li>Strategic analysis and opportunity matrix</li></ul></div>
+<div class="fp"><h2>Sign in</h2><label for="em">Work email</label><input id="em" type="email" autocomplete="username" value="analyst@rxbenefits.demo"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" value="demo"><div class="err hid" id="err">Email or password not recognised.</div><button class="bt" id="go">Sign in</button>
+<div class="demo"><b>Prototype accounts</b> (password <b>demo</b>)<br>analyst@rxbenefits.demo · RxBenefits only<br>analyst@immunodx.demo · Immunodiagnostics only<br>admin@evalueserve.com · both clients</div></div></div></div>
+<div id="app" class="hid"><aside class="side" id="side"><div class="hd"><div class="br">EVALUESERVE</div><div class="pr">IntelHub</div></div>
+<div class="cl"><div class="k">Client workspace</div><select id="csel" aria-label="Client"></select></div><div id="nav"></div>
+<div class="so"><div id="who"></div><button id="out">Sign out</button></div></aside>
+<div class="main"><div class="top"><button class="burger" id="bg" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><div class="crumb"><span id="cn"></span> › <b id="vn"></b></div><div class="badge" id="ind"></div></div><div class="cv" id="cv"></div></div></div>
+<script>
+var RX={days:[],counts:[]};
+var ACC={'analyst@rxbenefits.demo':['rx'],'analyst@immunodx.demo':['dx'],'admin@evalueserve.com':['rx','dx']};
+var CL={rx:{name:'RxBenefits',ind:'Pharmacy benefits · self-funded employers',live:true},dx:{name:'Immunodiagnostics & Allergy',ind:'IVD · allergy immunotherapy',live:false}};
+var VIEWS=[['news','Daily News Alerts','M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9'],['letter','Newsletter Report','M4 4h16v16H4zM8 9h8M8 13h8M8 17h5'],['month','Monthly Report','M3 5h18v16H3zM3 10h18M8 3v4M16 3v4'],['qtr','Quarterly Report','M21 12a9 9 0 1 1-9-9v9z'],['lead','Leadership Report','M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z'],['trend','Trends Report','M3 17l6-6 4 4 8-8'],['bot','Research Bot','M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],['mkt','Market Monitoring','M3 3v18h18M7 14l4-4 3 3 5-6'],['comp','Competitor Monitoring','M12 3v18M4 7h16M6 7l-3 6h6zM18 7l-3 6h6z'],['strat','Strategic Analysis','M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0'],['matrix','Opportunity Matrix','M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z']];
+var GROUPS={news:'Alerts',letter:'Reports',month:'Reports',qtr:'Reports',lead:'Reports',trend:'Reports',bot:'Research',mkt:'Monitoring',comp:'Monitoring',strat:'Analysis',matrix:'Analysis'};
+/* ---------- client content (kept per client; only the active client's block is rendered) ---------- */
+var C={
+rx:{topics:['PBM reform','Drug pricing','Specialty drugs','Litigation','Employer benefits'],
+ kpi:[['Articles this week','~'+Math.round(RX.counts.slice(-7).reduce(function(a,b){return a+b.n},0))],['Days tracked',RX.counts.length],['Sources','Google News']],
+ mkt:[['Pharmacy inflation','Rising',3],['PBM regulatory pressure','High',5],['Specialty drug spend','Rising',4],['Employer cost concern','High',5]],
+ comp:['CVS Caremark','OptumRx','Express Scripts','Prime Therapeutics','Navitus','Capital Rx'],
+ sw:{S:['Transparent, employer-aligned model','Deep self-funded expertise'],W:['Smaller scale than big-3 PBMs','Rebate leverage'],O:['PBM reform momentum','Demand for pass-through pricing'],T:['Vertical integration of big-3','Federal policy uncertainty']},
+ opp:[['Transparency-led PBM alternative',8.4,7.6,46],['Specialty drug cost programs',8.0,6.4,40],['Rebate aggregation services',6.2,7.8,26],['Mid-market employer bundles',5.4,5.0,20]],
+ leader:['Pharmacy benefit reform is the dominant theme: litigation and state action on PBMs raise both risk and demand for transparency.','Big-3 vertically integrated players are restructuring formulary and pricing models.','Employer cost pressure keeps specialty and GLP-1 spend on every agenda.'],
+ bot:{pbm:'Across recent alerts, PBM reform and litigation dominate: state-level suits over insulin pricing, scrutiny of rebate structures, and big-3 restructuring of pricing models. See the Daily News tab for sourced items.',cvs:'CVS Caremark appears repeatedly in recent alerts around strategic shifts in pharmacy benefit models and formulary design.',_:'I can answer from this client\u2019s alerts and reports. Try "PBM reform", "CVS", or "specialty drugs".'}},
+dx:{topics:['Regulatory','M&A','Product launch','Partnership','Conference'],
+ kpi:[['Competitors tracked',148],['Products screened','300+'],['PR sites scanned',34]],
+ mkt:[['Autoimmune testing volumes','Rising',4],['Allergy component diagnostics','Rising',4],['Multiplex adoption','Rising',4],['Reimbursement pressure','Moderate',3]],
+ comp:['Werfen','Revvity / EUROIMMUN','Thermo Fisher (Phadia)','DiaSorin','Siemens Healthineers','Bio-Rad'],
+ sw:{S:['Broad assay menu','Automation footprint'],W:['Limited allergy component menu','Service reach in emerging markets'],O:['Multiplex / molecular allergy','POC allergy screening'],T:['Chinese CLIA entrants (Snibe, YHLO, Autobio)','Price erosion']},
+ opp:[['Multiplex allergy panels',8.3,7.2,44],['POC allergy screening',7.1,6.0,32],['Autoimmune automation upgrade',7.7,5.2,38],['Emerging-market CLIA',5.6,6.6,24]],
+ leader:['Automation and multiplexing are the main battleground in immunodiagnostics.','Chinese CLIA players are expanding via price and menu breadth.','Conferences (EAACI, AAAAI) remain the launch venue for new allergy assays.'],
+ bot:{ce:'DNL tracks CE-mark, FDA clearance and 510(k) items as regulatory news and flags approvals as HOT.',chinese:'Snibe, YHLO and Autobio are on the screened list and appear in the competitor monitoring tab.',_:'I can answer from this client\u2019s scan. Try "CE mark", "Chinese CLIA", or "multiplex".'}}};
+var DXNEWS=[['HOT','Regulatory','Werfen','Illustrative: CE-mark for new autoimmune assay panel','Regulatory approval flagged HOT by keyword rules.'],['HOT','M&A','Sample Co.','Illustrative: acquisition of an allergy diagnostics specialist','M&A items are flagged HOT.'],['Non-Hot','Product Launch','DiaSorin','Illustrative: LIAISON menu expansion','Product screening match.'],['Non-Hot','Conference','ALK','Illustrative: EAACI congress data presentation','Conference item.']];
+var CUR=null,VIEW='news',USER=null,DAY=0,TOPIC='All';
+function $(i){return document.getElementById(i)}function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function est(){return '<span class="est">est</span>'}
+/* ---------- auth & client isolation ---------- */
+$('go').onclick=function(){var e=$('em').value.trim().toLowerCase();if(!ACC[e]||$('pw').value!=='demo'){$('err').classList.remove('hid');return}USER={email:e,clients:ACC[e]};
+ $('login').classList.add('hid');$('app').classList.remove('hid');
+ var s=$('csel');s.innerHTML=USER.clients.map(function(c){return '<option value="'+c+'">'+CL[c].name+'</option>'}).join('');s.disabled=USER.clients.length<2;
+ $('who').textContent=e;CUR=USER.clients[0];buildNav();open_(VIEW)};
+$('csel').onchange=function(){if(USER.clients.indexOf(this.value)<0)return;CUR=this.value;open_(VIEW)};
+$('out').onclick=function(){USER=null;CUR=null;$('cv').innerHTML='';$('app').classList.add('hid');$('login').classList.remove('hid')};
+$('bg').onclick=function(){$('side').classList.toggle('open')};
+function buildNav(){var h='',last='';VIEWS.forEach(function(v){var g=GROUPS[v[0]];if(g!==last){h+='<div class="gl">'+g+'</div>';last=g}
+ h+='<button class="ni" data-v="'+v[0]+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="'+v[2]+'"/></svg>'+v[1]+(v[0]=='news'?'<span class="n">'+(CUR=='rx'?(RX.days.length ? RX.days[RX.days.length-1].a.length : 0):4)+'</span>':'')+'</button>'});$('nav').innerHTML=h;
+ $('nav').onclick=function(e){var b=e.target.closest('.ni');if(b){open_(b.dataset.v);$('side').classList.remove('open')}}}
+function open_(v){if(!USER||USER.clients.indexOf(CUR)<0)return;VIEW=v;buildNav();
+ document.querySelectorAll('.ni').forEach(function(n){n.classList.toggle('on',n.dataset.v===v)});
+ $('cn').textContent=CL[CUR].name;$('ind').textContent=CL[CUR].ind;$('vn').textContent=VIEWS.filter(function(x){return x[0]==v})[0][1];
+ $('cv').innerHTML=R[v]();$('cv').scrollTop=0;if(after[v])after[v]()}
+/* ---------- helpers ---------- */
+function head(t,p){return '<div class="vh"><h2>'+t+'</h2><p>'+p+'</p></div>'}
+function kpis(){return '<div class="g g3">'+C[CUR].kpi.map(function(k,i){return '<div class="card kpi"><div class="l">'+k[0]+'</div><div class="v'+(i==0?' r':'')+'">'+k[1]+'</div></div>'}).join('')+'</div>'}
+function rep(t,title,txt){return '<div class="rep"><div class="t">'+t+'</div><h3>'+title+'</h3><p>'+txt+'</p><div class="acts"><button onclick="window.print()">Print / save PDF</button></div></div>'}
+function bullets(a){return a.map(function(x){return '<div class="th">'+x+'</div>'}).join('')}
+function newsList(){var c=C[CUR];
+ if(CUR=='rx'){var d=RX.days[DAY],h='<div class="chips" role="group" aria-label="Date">'+RX.days.slice().reverse().map(function(x){var i=RX.days.indexOf(x);return '<button class="chip'+(i==DAY?' on':'')+'" onclick="DAY='+i+';open_(\'news\')">'+x.d.slice(5)+'</button>'}).join('')+'</div>';
+  return h+d.a.map(function(a){return '<div class="news"><div class="m"><span class="pill">'+esc(a.src)+'</span><span>'+d.d+'</span></div><h4>'+esc(a.t)+'</h4><p>'+esc(a.s)+'</p><div style="margin-top:8px"><a href="'+esc(a.l)+'" target="_blank" rel="noopener">Read source</a></div></div>'}).join('')}
+ return '<div class="foot" style="margin:0 0 12px;border:0">Sample rows illustrate the DNL output format; connect DNL run output to replace them.</div>'+DXNEWS.map(function(a){return '<div class="news"><div class="m"><span class="pill '+(a[0]=='HOT'?'p-r':'')+'">'+a[0]+'</span><span class="pill">'+a[1]+'</span><span>'+a[2]+'</span></div><h4>'+a[3]+'</h4><p>'+a[4]+'</p></div>'}).join('')}
+/* ---------- views ---------- */
+var R={
+news:function(){return head('Daily News Alerts','Filtered, summarised alerts for '+CL[CUR].name+'. '+(CUR=='rx'?'Live data from the News Radar pipeline (last 10 runs).':'Format from the DNL scan: HOT flag, news type, entity.'))+kpis()+'<div class="sec">Latest alerts</div>'+newsList()},
+letter:function(){var c=C[CUR];return head('Newsletter Report','Weekly digest, ready to send.')+rep('This week',CL[CUR].name+' intelligence digest','Top themes: '+c.topics.join(', ')+'. Highlights below are drawn from the alert feed.')+'<div class="card"><div class="mh">Top stories</div>'+(CUR=='rx'?bullets(RX.days[RX.days.length-1].a.slice(0,5).map(function(a){return esc(a.t)+' <span class="pill">'+esc(a.src)+'</span>'})):bullets(DXNEWS.map(function(a){return a[3]})))+'</div>'},
+month:function(){var c=C[CUR];return head('Monthly Report','Month-on-month view of volume and themes.')+rep('Monthly','Monthly intelligence summary','Alert volume, top entities and emerging themes for the month.')+(CUR=='rx'?'<div class="card"><div class="mh">Alerts per day (last 30 runs)</div><div id="spark"></div></div>':'<div class="card"><div class="mh">News-type mix'+est()+'</div>'+[['Regulatory',30],['Product Launch',26],['Partnership',18],['M&A',14],['Conference',12]].map(function(x){return '<div style="font-size:12px;margin-bottom:8px">'+x[0]+' <b>'+x[1]+'%</b><div class="bar"><i style="width:'+x[1]+'%"></i></div></div>'}).join('')+'</div>')},
+qtr:function(){var c=C[CUR];return head('Quarterly Report','Quarter-level strategic review.')+rep('Quarterly','Quarterly strategic review','Structure: market shifts, competitor moves, risks and recommended actions.')+'<div class="g g2"><div class="card"><div class="mh">Market shifts</div>'+bullets(c.mkt.map(function(m){return m[0]+': '+m[1]}))+'</div><div class="card"><div class="mh">Recommended actions</div>'+bullets(c.opp.slice(0,3).map(function(o){return 'Pursue: '+o[0]}))+'</div></div>'},
+lead:function(){return head('Leadership Report','One page for executives.')+rep('Leadership','Executive brief','Three things leadership should know this period.')+'<div class="card">'+bullets(C[CUR].leader)+'</div>'},
+trend:function(){return head('Trends Report','Themes ranked by momentum.')+'<div class="card">'+C[CUR].mkt.map(function(m){return '<div style="font-size:12.5px;margin-bottom:12px">'+m[0]+' <b>'+m[1]+'</b>'+est()+'<div class="bar"><i class="'+(m[2]>=5?'r':'')+'" style="width:'+m[2]*20+'%"></i></div></div>'}).join('')+'</div>'},
+bot:function(){return head('Research Bot','Ask a question; answers draw only on '+CL[CUR].name+' data.')+'<div class="card chat"><div class="msgs" id="msgs"><div class="m1 b">Hi, I\u2019m the '+CL[CUR].name+' research assistant. Try: '+C[CUR].topics.slice(0,2).join(', ')+'.</div></div><div class="ci"><input id="q" placeholder="Ask about news, competitors or trends" aria-label="Question"><button id="qs">Send</button></div></div><div class="foot">Prototype: keyword lookup over local data. Connect an LLM endpoint for free-form answers.</div>'},
+mkt:function(){var c=C[CUR];return head('Market Monitoring','Signals tracked continuously.')+'<div class="g g2">'+c.mkt.map(function(m){return '<div class="card"><div class="mh">'+m[0]+'</div><span class="pill '+(m[2]>=5?'p-r':m[2]>=4?'p-a':'')+'">'+m[1]+'</span><div class="bar"><i style="width:'+m[2]*20+'%"></i></div></div>'}).join('')+'</div>'+'<div class="sec">Tracked topics</div><div class="chips">'+c.topics.map(function(t){return '<span class="chip">'+t+'</span>'}).join('')+'</div>'},
+comp:function(){var c=C[CUR];var rows=c.comp,cols=['News volume','Product activity','Regulatory','Partnerships'];var sc=rows.map(function(_,i){return cols.map(function(_,j){return ((i*3+j*2)%5)+1})});
+ return head('Competitor Monitoring','Activity heat map across tracked competitors.')+'<div class="card"><div class="mh">Activity intensity'+est()+'</div><div class="hm" style="grid-template-columns:1.5fr repeat(4,1fr)"><div></div>'+cols.map(function(x){return '<div class="ch">'+x+'</div>'}).join('')+rows.map(function(r,i){return '<div class="rh">'+r+'</div>'+sc[i].map(function(v){return '<div class="s'+v+'">'+v+'</div>'}).join('')}).join('')+'</div></div>'},
+strat:function(){var s=C[CUR].sw,k={S:'Strengths',W:'Weaknesses',O:'Opportunities',T:'Threats'};return head('Strategic Analysis','SWOT synthesised from the evidence base.')+'<div class="g g2">'+['S','W','O','T'].map(function(x){return '<div class="card"><div class="mh">'+k[x]+'</div>'+bullets(s[x])+'</div>'}).join('')+'</div>'},
+matrix:function(){var o=C[CUR].opp;return head('Opportunity Matrix','Attractiveness against ability to win; bubble is size of prize.')+'<div class="g g2"><div class="pmap"><div class="ax x">Attractiveness →</div><div class="ax y">Ability to win →</div><div class="h"></div><div class="v"></div>'+o.map(function(p,i){return '<div class="pt'+(i==0?' r':'')+'" style="left:'+(p[1]*10-4)+'%;top:'+(100-p[2]*10)+'%"><i style="width:'+p[3]+'px;height:'+p[3]+'px"></i><span>'+p[0]+'</span></div>'}).join('')+'</div><div class="card"><table class="tb"><thead><tr><th>Opportunity</th><th>Attr.</th><th>Win</th></tr></thead><tbody>'+o.map(function(p){return '<tr><td><b>'+p[0]+'</b></td><td>'+p[1]+'</td><td>'+p[2]+'</td></tr>'}).join('')+'</tbody></table><div class="foot">Scores illustrative'+est()+'; replace with analyst scoring.</div></div></div>'}};
+var after={month:function(){var e=$('spark');if(!e)return;var d=RX.counts,m=Math.max.apply(null,d.map(function(x){return x.n})),w=560,h=120,bw=w/d.length;e.innerHTML='<svg viewBox="0 0 '+w+' '+h+'" width="100%" role="img" aria-label="Alerts per day">'+d.map(function(x,i){var bh=(h-14)*x.n/m;return '<rect x="'+(i*bw+2)+'" y="'+(h-bh)+'" width="'+(bw-4)+'" height="'+bh+'" rx="2" fill="'+(i==d.length-1?'#e0044e':'#9b7aa8')+'"><title>'+x.d+': '+x.n+'</title></rect>'}).join('')+'</svg>'},
+bot:function(){function send(){var q=$('q').value.trim();if(!q)return;var m=$('msgs');m.insertAdjacentHTML('beforeend','<div class="m1 u">'+esc(q)+'</div>');var b=C[CUR].bot,a=b._;Object.keys(b).forEach(function(k){if(k!='_'&&q.toLowerCase().indexOf(k)>=0)a=b[k]});m.insertAdjacentHTML('beforeend','<div class="m1 b">'+esc(a)+'</div>');$('q').value='';m.scrollTop=m.scrollHeight}
+ $('qs').onclick=send;$('q').onkeydown=function(e){if(e.key==='Enter')send()}}};
+</script><script src="integration.js"></script></body></html>
